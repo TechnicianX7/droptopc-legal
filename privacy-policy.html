@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DropToPC Privacy Policy</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4f7fb;
+        --panel: #ffffff;
+        --text: #16202a;
+        --muted: #516171;
+        --border: #d7e0ea;
+        --accent: #0f74d8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(180deg, #eef5ff 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 32px 20px 64px;
+      }
+
+      article {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 28px;
+        box-shadow: 0 20px 50px rgba(15, 37, 64, 0.08);
+      }
+
+      h1,
+      h2 {
+        line-height: 1.2;
+        margin: 0 0 16px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+        margin-top: 28px;
+      }
+
+      p,
+      li {
+        line-height: 1.65;
+      }
+
+      p {
+        margin: 0 0 14px;
+      }
+
+      ul {
+        margin: 0 0 18px 22px;
+        padding: 0;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        margin-bottom: 12px;
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .callout {
+        background: #f8fbff;
+        border: 1px solid #cfe1f9;
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin: 18px 0 6px;
+      }
+
+      code {
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.95em;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <article>
+        <div class="eyebrow">DropToPC</div>
+        <h1>Privacy Policy</h1>
+        <p class="muted">Effective date: 2026-03-26</p>
+        <p class="muted">This draft is based on the current code and packaging in this repository.</p>
+
+        <h2>1. What DropToPC Does</h2>
+        <p>
+          DropToPC is a Windows desktop app that receives files from a phone browser through a locally hosted receiver on
+          the PC. In packaged builds, the receiver uses HTTPS with a locally generated self-signed certificate.
+        </p>
+
+        <h2>2. Information the App Handles</h2>
+        <p>DropToPC can process:</p>
+        <ul>
+          <li>Files you choose to upload from your phone.</li>
+          <li>File metadata such as file name, MIME type, and size.</li>
+          <li>Transfer metadata such as start time, completion time, status, and source LAN IP address.</li>
+          <li>Session data such as the one-time session token, whether a PIN is required, and session expiration time.</li>
+          <li>App settings such as the receive folder, size limits, security settings, and optional privacy/support links.</li>
+          <li>Security metadata such as Windows Defender scan status, scan messages, and quarantine status.</li>
+          <li>User-triggered support-bundle data such as diagnostics, recent local logs, sanitized settings, and sanitized transfer history.</li>
+        </ul>
+
+        <h2>3. Network Behavior</h2>
+        <ul>
+          <li>The phone upload page and upload API are hosted by the PC.</li>
+          <li>In packaged builds, transfer traffic between the phone browser and the PC receiver uses HTTPS.</li>
+          <li>The app source inspected for this release does not contain runtime analytics, crash reporting, advertising SDKs, automatic update checks, CDN calls, or developer-managed cloud relay services.</li>
+          <li>The mobile upload page is controlled by a one-time session URL token.</li>
+          <li>Any device that can reach the PC and knows the full session URL can load the upload page.</li>
+          <li>Successful uploads can also require the current session PIN and, by default, a same-subnet network check.</li>
+        </ul>
+
+        <h2>4. Local Storage</h2>
+        <p>DropToPC stores data locally on the PC, including:</p>
+        <ul>
+          <li>Accepted files in the selected receive folder.</li>
+          <li>Temporary in-progress upload files in <code>&lt;receive-folder&gt;/_incoming</code> before they are moved into the final destination.</li>
+          <li>Threat-detected files in <code>&lt;receive-folder&gt;/_quarantine</code> when quarantine is enabled.</li>
+          <li>Settings in <code>settings.json</code> under Electron <code>userData</code>.</li>
+          <li>Transfer history in <code>history.json</code> under Electron <code>userData</code>.</li>
+          <li>Local receiver certificate material in <code>tls/receiver-cert.json</code> under Electron <code>userData</code>.</li>
+          <li>Local operational logs in <code>logs/droptopc.log</code> and <code>logs/droptopc.previous.log</code> under Electron <code>userData</code>.</li>
+          <li>Optional support bundle export files that the user chooses to save.</li>
+        </ul>
+
+        <h2>5. Security Controls</h2>
+        <p>DropToPC currently includes:</p>
+        <ul>
+          <li>HTTPS transport in packaged builds.</li>
+          <li>A one-time session URL token.</li>
+          <li>An optional 6-digit PIN, enabled by default.</li>
+          <li>Session expiration, 10 minutes by default.</li>
+          <li>Optional same-subnet enforcement, enabled by default.</li>
+          <li>Upload rate limits and concurrent-upload limits.</li>
+          <li>Filename sanitization and duplicate-safe final naming.</li>
+          <li>Optional Windows Defender scanning.</li>
+          <li>Optional quarantine for detected threats.</li>
+          <li>Mark-of-the-Web tagging on uploaded, quarantined, and restored files.</li>
+        </ul>
+        <p>
+          DropToPC does not automatically install the local receiver certificate into the phone or PC trust store. A phone
+          browser may show a certificate warning the first time it connects to the receiver.
+        </p>
+
+        <h2>6. User Controls</h2>
+        <p>Users can:</p>
+        <ul>
+          <li>Choose the receive folder.</li>
+          <li>Start or stop the receiver.</li>
+          <li>Regenerate the upload session.</li>
+          <li>Clear transfer history.</li>
+          <li>Export a support bundle.</li>
+          <li>Restore or delete quarantined files.</li>
+        </ul>
+
+        <h2>7. Contact</h2>
+        <p>Support contact: J_Nova_@outlook.com</p>
+      </article>
+    </main>
+  </body>
+</html>
